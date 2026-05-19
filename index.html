@@ -2022,61 +2022,37 @@
         const data = {};
         for (const pair of fd.entries()) data[pair[0]] = pair[1];
 
-        // ----- Construction d'un récapitulatif lisible (assurance contre un template qui n'exposerait que {{message}}) -----
-        const labels = {
-          subject: 'Type de demande',
-          from_name: 'Nom',
-          from_email: 'E-mail',
-          phone: 'Téléphone',
-          birth_date: 'Date de naissance',
-          topic: 'Objet',
-          message: 'Message'
-        };
-        const order = ['subject','from_name','from_email','phone','birth_date','topic','message'];
-        let recap = '';
-        order.forEach(function(k){
-          if (data[k] && k !== 'message') recap += labels[k] + ' : ' + data[k] + '\n';
-        });
-        if (data.message) recap += '\n— Message —\n' + data.message;
-        const fromName = data.from_name || 'Marco Voyance';
+        const fromName  = data.from_name || 'Marco Voyance';
         const fromEmail = data.from_email || '';
         const userMsg   = data.message || '';
 
-        // ----- Payload : chaque donnée envoyée sous TOUS les noms de variables courants -----
+        // ----- Payload : une seule variable par champ, alignée sur le template EmailJS -----
         const payload = {
-          // Noms (4 conventions courantes)
-          name:       fromName,
+          // Nom
           from_name:  fromName,
-          user_name:  fromName,
-          nom:        fromName,
-          // E-mails
-          email:      fromEmail,
+          name:       '',
+          prenom:     '',
+          // E-mail
           from_email: fromEmail,
-          user_email: fromEmail,
+          email:      '',
           reply_to:   fromEmail,
           // Sujet
           subject:    data.subject || '',
-          objet:      data.subject || '',
-          title:      data.subject || '',
           // Téléphone
           phone:      data.phone || '',
-          telephone:  data.phone || '',
+          telephone:  '',
           // Date de naissance
-          birth_date:     data.birth_date || '',
-          date_naissance: data.birth_date || '',
-          // Topic (contact)
+          birth_date: data.birth_date || '',
+          // Objet (form contact)
           topic:      data.topic || '',
-          objet_msg:  data.topic || '',
           // Type de formulaire
           form_type:  data.form_type || '',
-          // Message — recap complet (toutes les infos dans le message lui-même)
-          message:     recap,
-          user_message: recap,
-          question:    userMsg,
-          // Variables additionnelles utiles
-          recap:        recap,
-          full_message: recap,
-          details:      recap
+          // Message
+          message:    userMsg,
+          // Variables RDV (vides pour marcovoyance.com)
+          date_rdv:          '',
+          heure:             '',
+          type_consultation: ''
         };
 
         emailjs.send('service_8pt08ad', 'template_qe0x9k7', payload)
