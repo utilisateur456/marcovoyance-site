@@ -431,9 +431,65 @@
     .nav__cta svg { width: 14px; height: 14px; }
     .nav__cta-price { color: rgba(245, 238, 223, 0.55); font-weight: 400; }
 
+    /* Bouton burger — visible uniquement sur mobile */
+    .nav__burger {
+      display: none;
+      width: 38px;
+      height: 38px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: var(--ink);
+      position: relative;
+      z-index: 60;
+      margin-left: 8px;
+    }
+    .nav__burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: currentColor;
+      margin: 5px auto;
+      transition: transform .3s ease, opacity .2s ease;
+    }
+    .nav__burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__burger.open span:nth-child(2) { opacity: 0; }
+    .nav__burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
     @media (max-width: 760px) {
-      .nav__links { display: none; }
+      .nav__burger { display: block; }
       .nav__cta-price { display: none; }
+      .nav__cta { padding: 8px 14px; font-size: 0.8rem; }
+
+      /* Menu plein écran sur mobile */
+      .nav__links {
+        position: fixed;
+        inset: 0;
+        background: var(--cream);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        z-index: 55;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s ease;
+        display: flex;
+      }
+      .nav__links.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav__links a {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.7rem;
+        color: var(--ink);
+        font-weight: 360;
+        font-variation-settings: "opsz" 144, "SOFT" 60;
+      }
+      .nav__links a::after { display: none; }
     }
 
     /* ============================================================
@@ -623,6 +679,7 @@
       border-bottom: 1px solid var(--hair);
     }
     .section__head h2 { max-width: 14ch; }
+    .section__head h2.section__head--wide { max-width: none; }
     .section__head .roman { align-self: start; padding-top: 6px; }
     .section__head p {
       max-width: 36em;
@@ -880,6 +937,9 @@
     @media (max-width: 900px) {
       .about__grid { grid-template-columns: 1fr; }
     }
+    @media (max-width: 600px) {
+      .about__col-left { max-width: 420px; margin: 0 auto; width: 100%; }
+    }
 
     /* ============================================================
        IV. POUR CONSULTER (HORAIRES + PAIEMENT)
@@ -943,6 +1003,40 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .pay-list li.pay-link {
+      padding: 0;
+    }
+    .pay-list li.pay-link a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: var(--ink);
+      position: relative;
+    }
+    .pay-list li.pay-link a::after {
+      content: "↗";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--copper);
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      opacity: 0;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .pay-list li.pay-link:hover {
+      background: var(--cream-warm);
+      border-color: var(--copper-light);
+    }
+    .pay-list li.pay-link:hover a::after {
+      opacity: 1;
+      transform: translateY(-50%) translate(2px, -2px);
     }
     .pay-list li strong {
       font-family: var(--serif);
@@ -1297,6 +1391,9 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         0901 212 212&nbsp;<span class="nav__cta-price">· CHF 2.–/min</span>
       </a>
+      <button class="nav__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -1557,7 +1654,7 @@
       <div class="section__head" style="border-color:rgba(31,27,48,0.18);">
         <span class="roman reveal">III</span>
         <div>
-          <h2 class="reveal" data-delay="1">L'homme derrière la voix</h2>
+          <h2 class="reveal section__head--wide" data-delay="1">L'homme derrière la voix</h2>
         </div>
       </div>
 
@@ -1648,17 +1745,23 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span><strong>Facture téléphone</strong><br><small style="color:var(--muted);">Automatique via opérateur</small></span>
             </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
-              <span><strong>Twint</strong><br><small style="color:var(--muted);">Paiement mobile suisse</small></span>
+            <li class="pay-link">
+              <a href="https://go.twint.ch/1/e/tw?tw=acq.ZyMUOjPnQcG6FgTkDskeox9MUbMxm07n60GpwpqeezsfvYNMZxK3gd5UC9GjjxcX" target="_blank" rel="noopener noreferrer" aria-label="Payer avec Twint (nouvel onglet)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
+                <span><strong>Twint</strong><br><small style="color:var(--muted);">Payer maintenant</small></span>
+              </a>
             </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 8c1.5-1 4-1 5 1s-1 4-2 5"/><path d="M11 16h.01"/></svg>
-              <span><strong>PayPal</strong><br><small style="color:var(--muted);">International accepté</small></span>
+            <li class="pay-link">
+              <a href="https://www.paypal.com/ncp/payment/VEWS58585DEVC" target="_blank" rel="noopener noreferrer" aria-label="Payer avec PayPal (nouvel onglet)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 8c1.5-1 4-1 5 1s-1 4-2 5"/><path d="M11 16h.01"/></svg>
+                <span><strong>PayPal</strong><br><small style="color:var(--muted);">Payer en ligne · international</small></span>
+              </a>
             </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18 M7 15h4"/></svg>
-              <span><strong>Carte bancaire</strong><br><small style="color:var(--muted);">Visa, Mastercard</small></span>
+            <li class="pay-link">
+              <a href="https://www.paypal.com/ncp/payment/VEWS58585DEVC" target="_blank" rel="noopener noreferrer" aria-label="Payer par carte bancaire via PayPal (nouvel onglet)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18 M7 15h4"/></svg>
+                <span><strong>Carte bancaire</strong><br><small style="color:var(--muted);">Visa, Mastercard · via PayPal</small></span>
+              </a>
             </li>
             <li style="grid-column:1/-1;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h18v4H3z"/><path d="M3 12h18v4H3z"/><path d="M3 20h18"/></svg>
@@ -1914,7 +2017,69 @@
         status.className = 'form-status';
         status.textContent = '';
 
-        emailjs.sendForm('service_8pt08ad', 'template_qe0x9k7', form)
+        // ----- Collecte des données du formulaire -----
+        const fd = new FormData(form);
+        const data = {};
+        for (const pair of fd.entries()) data[pair[0]] = pair[1];
+
+        // ----- Construction d'un récapitulatif lisible (assurance contre un template qui n'exposerait que {{message}}) -----
+        const labels = {
+          subject: 'Type de demande',
+          from_name: 'Nom',
+          from_email: 'E-mail',
+          phone: 'Téléphone',
+          birth_date: 'Date de naissance',
+          topic: 'Objet',
+          message: 'Message'
+        };
+        const order = ['subject','from_name','from_email','phone','birth_date','topic','message'];
+        let recap = '';
+        order.forEach(function(k){
+          if (data[k] && k !== 'message') recap += labels[k] + ' : ' + data[k] + '\n';
+        });
+        if (data.message) recap += '\n— Message —\n' + data.message;
+        const fromName = data.from_name || 'Marco Voyance';
+        const fromEmail = data.from_email || '';
+        const userMsg   = data.message || '';
+
+        // ----- Payload : chaque donnée envoyée sous TOUS les noms de variables courants -----
+        const payload = {
+          // Noms (4 conventions courantes)
+          name:       fromName,
+          from_name:  fromName,
+          user_name:  fromName,
+          nom:        fromName,
+          // E-mails
+          email:      fromEmail,
+          from_email: fromEmail,
+          user_email: fromEmail,
+          reply_to:   fromEmail,
+          // Sujet
+          subject:    data.subject || '',
+          objet:      data.subject || '',
+          title:      data.subject || '',
+          // Téléphone
+          phone:      data.phone || '',
+          telephone:  data.phone || '',
+          // Date de naissance
+          birth_date:     data.birth_date || '',
+          date_naissance: data.birth_date || '',
+          // Topic (contact)
+          topic:      data.topic || '',
+          objet_msg:  data.topic || '',
+          // Type de formulaire
+          form_type:  data.form_type || '',
+          // Message — recap complet (toutes les infos dans le message lui-même)
+          message:     recap,
+          user_message: recap,
+          question:    userMsg,
+          // Variables additionnelles utiles
+          recap:        recap,
+          full_message: recap,
+          details:      recap
+        };
+
+        emailjs.send('service_8pt08ad', 'template_qe0x9k7', payload)
           .then(function() {
             status.className = 'form-status ok';
             status.textContent = successMessage;
@@ -1938,6 +2103,31 @@
       'Votre message est arrivé. Je vous réponds dans la journée.');
     bindForm('form-newsletter', 'newsletter',
       'Inscription confirmée. À bientôt pour la prochaine lettre saisonnière.');
+  </script>
+
+  <!-- ============================================================
+       Menu burger mobile
+       ============================================================ -->
+  <script>
+    (function(){
+      var burger = document.getElementById('navBurger');
+      var links = document.querySelector('.nav__links');
+      if (!burger || !links) return;
+      function toggleMenu(open){
+        var willOpen = (typeof open === 'boolean') ? open : !links.classList.contains('open');
+        burger.classList.toggle('open', willOpen);
+        links.classList.toggle('open', willOpen);
+        burger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        document.body.style.overflow = willOpen ? 'hidden' : '';
+      }
+      burger.addEventListener('click', function(){ toggleMenu(); });
+      links.addEventListener('click', function(e){
+        if (e.target.tagName === 'A') toggleMenu(false);
+      });
+      window.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') toggleMenu(false);
+      });
+    })();
   </script>
 
   <!-- ============================================================
