@@ -1,0 +1,14 @@
+# robots.txt — Marco Voyance
+# https://marcovoyance.com/
+
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Pas d'indexation des éventuels fichiers de configuration
+Disallow: /*.json$
+Disallow: /admin/
+Disallow: /.git/
+
+# Sitemap
+Sitemap: https://marcovoyance.com/sitemap.xml
