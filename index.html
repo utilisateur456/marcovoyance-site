@@ -9,7 +9,7 @@
        ============================================================ -->
   <title>Voyance par téléphone, WhatsApp et e-mail · Vaud, Suisse — Marco Voyance</title>
   <meta name="description" content="Consultations de voyance, médiumnité et tarot par téléphone (0901 212 212), WhatsApp ou e-mail. Marco, médium en canton de Vaud — réponse personnelle, discrétion absolue, lecture honnête." />
-  <meta name="keywords" content="voyance, voyance par téléphone, voyance Suisse, voyance Vaud, voyance Lausanne, médium Suisse romande, tarot de Marseille, voyance WhatsApp, voyance par e-mail, numérologie, écriture automatique, oracle, guidance spirituelle" />
+  <meta name="keywords" content="voyance, voyance par téléphone, voyance Suisse, voyance Vaud, voyance Lausanne, médium Suisse romande, tarot de Marseille, voyance WhatsApp, voyance par e-mail, numérologie, écriture automatique, oracle, guidance spirituelle, boutique ésotérique, tarots, cristaux, bougies" />
   <meta name="author" content="Marco — Marco Voyance" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="googlebot" content="index, follow" />
@@ -112,6 +112,7 @@
         ],
         "knowsLanguage": ["fr-CH", "fr", "it", "en"],
         "founder": { "@id": "https://marcovoyance.com/#marco" },
+        "owns": { "@id": "https://maisonsiderale.com/#store" },
         "paymentAccepted": ["Facture téléphonique", "Twint", "PayPal", "Carte bancaire", "Virement IBAN"],
         "currenciesAccepted": "CHF",
         "hasOfferCatalog": {
@@ -180,6 +181,16 @@
         "url": "https://marcovoyance.com/#apropos"
       },
       {
+        "@type": "OnlineStore",
+        "@id": "https://maisonsiderale.com/#store",
+        "name": "Maison Sidérale",
+        "url": "https://maisonsiderale.com/",
+        "description": "Tarots, cristaux et bougies pour celles et ceux qui préfèrent lire les signes.",
+        "image": "https://maisonsiderale.com/cdn/shop/files/MaisonSeleste.logo.000222555.png",
+        "currenciesAccepted": "CHF",
+        "areaServed": { "@type": "Country", "name": "Suisse" }
+      },
+      {
         "@type": "WebSite",
         "@id": "https://marcovoyance.com/#website",
         "url": "https://marcovoyance.com/",
@@ -229,6 +240,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Oui. Le numéro 0901 fonctionne uniquement depuis la Suisse, mais les clients internationaux peuvent prendre rendez-vous via WhatsApp et régler la consultation par PayPal avant l'appel. Marco rappelle ensuite à l'heure convenue."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Marco propose-t-il une boutique d'objets de voyance ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui. Marco a réuni une sélection de tarots, cristaux et bougies dans sa boutique en ligne Maison Sidérale (maisonsiderale.com). Livraison offerte dès 50.– et expédition sous 48 h depuis la Suisse."
             }
           }
         ]
@@ -810,6 +829,111 @@
     }
 
     /* ============================================================
+       III. BOUTIQUE — Maison Sidérale
+       ============================================================ */
+    .boutique { background: var(--paper); }
+    .boutique h2 .it { color: var(--copper-deep); }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(16px, 2.4vw, 28px);
+    }
+    @media (max-width: 900px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 460px) { .shop-grid { grid-template-columns: 1fr; } }
+
+    .shop-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--cream);
+      border: 1px solid var(--hair);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .shop-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--copper-light);
+      box-shadow: 0 16px 40px rgba(61, 45, 74, 0.10);
+    }
+    .shop-card__img {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--cream-warm);
+    }
+    .shop-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .shop-card:hover .shop-card__img img { transform: scale(1.05); }
+    .shop-card__tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+    }
+    .shop-card__body {
+      padding: 18px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+    .shop-card__body h3 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.06rem;
+      line-height: 1.28;
+      letter-spacing: -0.005em;
+    }
+    .shop-card__price {
+      margin-top: auto;
+      font-family: var(--sans);
+      font-size: 0.86rem;
+      letter-spacing: 0.03em;
+      color: var(--copper-deep);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .shop-card__price del {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .boutique__cta {
+      margin-top: clamp(36px, 5vw, 56px);
+      padding-top: 32px;
+      border-top: 1px solid var(--hair);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .boutique__cta p {
+      margin: 0;
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+    }
+    .boutique__cta .btn svg { width: 15px; height: 15px; }
+    @media (max-width: 600px) {
+      .boutique__cta { flex-direction: column; align-items: flex-start; }
+      .boutique__cta .btn { width: 100%; justify-content: center; }
+    }
+
+    /* ============================================================
        CITATION ÉDITORIALE
        ============================================================ */
     .pullquote {
@@ -857,7 +981,7 @@
     }
 
     /* ============================================================
-       III. À PROPOS
+       IV. À PROPOS
        ============================================================ */
     .about {
       background: var(--cream-warm);
@@ -942,7 +1066,7 @@
     }
 
     /* ============================================================
-       IV. POUR CONSULTER (HORAIRES + PAIEMENT)
+       V. POUR CONSULTER (HORAIRES + PAIEMENT)
        ============================================================ */
     .access__grid {
       display: grid;
@@ -1383,6 +1507,7 @@
       <div class="nav__links">
         <a href="#consulter">Consulter</a>
         <a href="#pratiques">Pratiques</a>
+        <a href="#boutique">Boutique</a>
         <a href="#apropos">À propos</a>
         <a href="/journal.html">Journal</a>
         <a href="#acces">Tarifs & accès</a>
@@ -1635,6 +1760,78 @@
     </div>
   </section>
 
+  <!-- ====================== III. LA BOUTIQUE — MAISON SIDÉRALE ====================== -->
+  <section id="boutique" class="boutique">
+    <div class="wrap">
+
+      <div class="section__head">
+        <span class="roman reveal">III</span>
+        <div>
+          <h2 class="reveal" data-delay="1">La boutique <span class="it">Maison&nbsp;Sidérale</span></h2>
+          <p class="reveal" data-delay="2">
+            Les objets dont je parle, vous pouvez désormais en faire vos compagnons. J'ai réuni
+            dans une petite boutique en ligne des tarots, des pierres et des bougies choisis pour
+            leur justesse — pour celles et ceux qui préfèrent lire les signes plutôt que les subir.
+          </p>
+        </div>
+      </div>
+
+      <div class="shop-grid reveal">
+
+        <a class="shop-card" href="https://maisonsiderale.com/products/transparent-romantic-aromatherapy-candle-lamp-gift-aromatherapy-candle-guest-gift-candle-wedding-candle-candle-jar" target="_blank" rel="noopener">
+          <div class="shop-card__img">
+            <img src="https://maisonsiderale.com/cdn/shop/files/S5fdfb9ab531c46a497fee8560ab5852fF.webp?v=1779381208&amp;width=533" alt="Bougie d'aromathérapie en cire de soja — Maison Sidérale" loading="lazy">
+          </div>
+          <div class="shop-card__body">
+            <h3>Bougie d'aromathérapie en cire de soja</h3>
+            <span class="shop-card__price">CHF 29.90</span>
+          </div>
+        </a>
+
+        <a class="shop-card" href="https://maisonsiderale.com/products/lobsidienne-bracelet-de-protection-taillee-dans-le-verre-des-volcans-pour-celles-et-ceux-qui-filtrent-ce-qui-les-entoure" target="_blank" rel="noopener">
+          <div class="shop-card__img">
+            <img src="https://maisonsiderale.com/cdn/shop/files/S764d351d4ee84e7e990cf2c530924a07S.webp?v=1779558460&amp;width=533" alt="L'Obsidienne, bracelet de protection — Maison Sidérale" loading="lazy">
+          </div>
+          <div class="shop-card__body">
+            <h3>L'Obsidienne · bracelet de protection</h3>
+            <span class="shop-card__price">CHF 34.00</span>
+          </div>
+        </a>
+
+        <a class="shop-card" href="https://maisonsiderale.com/products/celtic-cross-altar-cloth-tarot-card-table-cloth-witch-moon-divination-table-cover-for-tarot-mat-witchy-gifts-decor-card-pad" target="_blank" rel="noopener">
+          <div class="shop-card__img">
+            <img src="https://maisonsiderale.com/cdn/shop/files/Sbfccd2f805de4d3c9dade7bdd673b303Q.webp?v=1779293625&amp;width=533" alt="Nappe d'autel Croix celtique — Maison Sidérale" loading="lazy">
+          </div>
+          <div class="shop-card__body">
+            <h3>Nappe d'autel · Croix celtique</h3>
+            <span class="shop-card__price">CHF 22.90</span>
+          </div>
+        </a>
+
+        <a class="shop-card" href="https://maisonsiderale.com/products/pochette-en-velours-pour-cartes-et-accessoires-de-divination" target="_blank" rel="noopener">
+          <div class="shop-card__img">
+            <span class="shop-card__tag">Promotion</span>
+            <img src="https://maisonsiderale.com/cdn/shop/files/S7ca2fcf0f82d45f39a0540f89678baabT.webp?v=1779291815&amp;width=533" alt="Pochette en velours pour cartes et accessoires de divination — Maison Sidérale" loading="lazy">
+          </div>
+          <div class="shop-card__body">
+            <h3>Pochette en velours · cartes &amp; accessoires</h3>
+            <span class="shop-card__price">CHF 12.90 <del>CHF 19.90</del></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="boutique__cta reveal" data-delay="1">
+        <p>Livraison offerte dès 50.– · expédition soignée sous 48 h depuis la Suisse.</p>
+        <a class="btn btn--solid" href="https://maisonsiderale.com/" target="_blank" rel="noopener">
+          Découvrir la boutique
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ====================== CITATION ====================== -->
   <section class="pullquote">
     <div class="wrap">
@@ -1647,12 +1844,12 @@
     </div>
   </section>
 
-  <!-- ====================== III. À PROPOS ====================== -->
+  <!-- ====================== IV. À PROPOS ====================== -->
   <section id="apropos" class="about">
     <div class="wrap">
 
       <div class="section__head" style="border-color:rgba(31,27,48,0.18);">
-        <span class="roman reveal">III</span>
+        <span class="roman reveal">IV</span>
         <div>
           <h2 class="reveal section__head--wide" data-delay="1">L'homme derrière la voix</h2>
         </div>
@@ -1709,12 +1906,12 @@
     </div>
   </section>
 
-  <!-- ====================== IV. TARIFS & ACCÈS ====================== -->
+  <!-- ====================== V. TARIFS & ACCÈS ====================== -->
   <section id="acces">
     <div class="wrap">
 
       <div class="section__head">
-        <span class="roman reveal">IV</span>
+        <span class="roman reveal">V</span>
         <div>
           <h2 class="reveal" data-delay="1">Pour consulter</h2>
           <p class="reveal" data-delay="2">
@@ -1784,12 +1981,12 @@
     </div>
   </section>
 
-  <!-- ====================== V. POSER UNE QUESTION (FORMULAIRE VOYANCE) ====================== -->
+  <!-- ====================== VI. POSER UNE QUESTION (FORMULAIRE VOYANCE) ====================== -->
   <section id="poser-question" style="background:var(--cream-warm);">
     <div class="wrap">
 
       <div class="section__head" style="border-color:rgba(31,27,48,0.18);">
-        <span class="roman reveal">V</span>
+        <span class="roman reveal">VI</span>
         <div>
           <h2 class="reveal" data-delay="1">Poser une question</h2>
           <p class="reveal" data-delay="2">
@@ -1838,12 +2035,12 @@
     </div>
   </section>
 
-  <!-- ====================== VI. ME CONTACTER (FORMULAIRE CONTACT) ====================== -->
+  <!-- ====================== VII. ME CONTACTER (FORMULAIRE CONTACT) ====================== -->
   <section id="me-contacter">
     <div class="wrap">
 
       <div class="section__head">
-        <span class="roman reveal">VI</span>
+        <span class="roman reveal">VII</span>
         <div>
           <h2 class="reveal" data-delay="1">Me contacter</h2>
           <p class="reveal" data-delay="2">
@@ -1944,6 +2141,7 @@
           <ul>
             <li><a href="#consulter">Trois manières</a></li>
             <li><a href="#pratiques">Mes pratiques</a></li>
+            <li><a href="#boutique">Boutique</a></li>
             <li><a href="#apropos">À propos</a></li>
             <li><a href="/journal.html">Journal</a></li>
             <li><a href="#acces">Tarifs &amp; accès</a></li>
@@ -1951,11 +2149,11 @@
         </div>
 
         <div class="foot__col">
-          <h4>Mentions</h4>
+          <h4>Boutique</h4>
           <ul>
-            <li><a href="#">CGV</a></li>
-            <li><a href="#">Confidentialité</a></li>
-            <li><a href="#">Numéro surtaxé</a></li>
+            <li><a href="https://maisonsiderale.com/" target="_blank" rel="noopener">Maison Sidérale</a></li>
+            <li><a href="https://maisonsiderale.com/collections/all" target="_blank" rel="noopener">Catalogue</a></li>
+            <li><a href="https://maisonsiderale.com/pages/contact" target="_blank" rel="noopener">Contact boutique</a></li>
           </ul>
         </div>
 
